@@ -1,8 +1,7 @@
 //
-//  Copyright Seiko Epson Corporation 2014-2018 All rights reserved.
+//  Copyright (C) Seiko Epson Corporation 2014 - 2020. All rights reserved.
 //
-//  Ver.2.2.1
-//
+//  ePOS EasySelect Ver.2.16.0
 
 enum EposEasySelectDeviceType : int {
     EPOS_EASY_SELECT_DEVTYPE_TCP = 0,

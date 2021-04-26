@@ -1,7 +1,7 @@
 =========================================================================
-          Epson ePOS SDK for iOS Version 2.14.0
+          Epson ePOS SDK for iOS Version 2.17.1
 
-          Copyright (C) Seiko Epson Corporation 2015 - 2020. All rights reserved.
+          Copyright (C) Seiko Epson Corporation 2015 - 2021. All rights reserved.
 =========================================================================
 
 1.本ソフトウェアについて
@@ -14,76 +14,26 @@ ePOS SDK には、Androidデバイス向けの Epson ePOS SDK for Android も用
 詳細は Epson ePOS SDK for iOS ユーザーズマニュアル を参照ください。
 
 対応iOS/iPadOSバージョン
-  iOS 10.0.1
-  iOS 10.2 - 10.3.2
   iOS 11 - 11.4.1
   iOS 12 - 12.4.3
-  iOS 13 - 13.3
-  iPadOS 13.1 - 13.3
+  iOS 13 - 13.7
+  iOS 14 - 14.1
+  iPadOS 13.1 - 13.7
+  iPadOS 14 - 14.2
 
 対応iOS/iPadOS端末
-  iPhone ( 5 / 5c / 5s / 6 / 6 Plus / 6s / 6s Plus / SE / 7 / 7 Plus / 8 / 8 Plus / X )
+  iPhone ( 5s / 6 / 6 Plus / 6s / 6s Plus / SE / 7 / 7 Plus / 8 / 8 Plus / X )
   iPod touch ( 第6世代 )
-  iPad ( 第4世代 / 第5世代 / 第6世代 )
+  iPad ( 第5世代 / 第6世代 / 第7世代 )
   iPad Pro ( 12.9-inch / 9.7-inch / 12.9-inch 2nd / 10.5-inch)
-  iPad Air / iPad Air 2
-  iPad mini 2 (iPad mini with Retina display) / iPad mini 3 / iPad mini 4
+  iPad Air / iPad Air 2 / iPad Air 3
+  iPad mini 2 (iPad mini with Retina display) / iPad mini 3 / iPad mini 4 / iPad mini 5
 
 動作確認XCodeバージョン
-  XCode11.3
+  XCode12.1
 
 サポートTMプリンター
-  EPSON TM-T100（海外モデルのみ）
-  EPSON TM-T20（海外モデルのみ）
-  EPSON TM-T20II
-  EPSON TM-T20III
-  EPSON TM-T20IIIL（海外モデルのみ）
-  EPSON TM-T20X
-  EPSON TM-T60（海外モデルのみ）
-  EPSON TM-T70
-  EPSON TM-T70II
-  EPSON TM-T81II（海外モデルのみ）
-  EPSON TM-T81III（海外モデルのみ）
-  EPSON TM-T82（海外モデルのみ）
-  EPSON TM-T82X（海外モデルのみ）
-  EPSON TM-T82II（海外モデルのみ）
-  EPSON TM-T82III（海外モデルのみ）
-  EPSON TM-T82IIIL（海外モデルのみ）
-  EPSON TM-T83III（海外モデルのみ）
-  EPSON TM-T88V
-  EPSON TM-T88VI
-  EPSON TM-T90II
-  EPSON TM-P20
-  EPSON TM-P60（海外モデルのみ）
-  EPSON TM-P60II
-  EPSON TM-P80
-  EPSON TM-U220 シリーズ（海外モデルのみ）
-  EPSON TM-U330 シリーズ（海外モデルのみ）
-  EPSON TM-m10
-  EPSON TM-m30
-  EPSON TM-m30II
-  EPSON TM-m30II-H
-  EPSON TM-H6000V（海外モデルのみ）
-
-サポートTMインテリジェントプリンター
-  EPSON TM-T20II-i
-  EPSON TM-T70-i
-  EPSON TM-T82II-i（海外モデルのみ）
-  EPSON TM-T83II-i（海外モデルのみ）
-  EPSON TM-T88V-i
-  EPSON TM-T88VI-iHUB（海外モデルのみ）
-  EPSON TM-U220-i（海外モデルのみ）
-  EPSON TM-T70II-DT
-  EPSON TM-T88V-DT
-  EPSON TM-H6000IV-DT（海外モデルのみ）
-  EPSON TM-T70II-DT2
-  EPSON TM-T88VI-DT2
-
-サポートネットワークプリンター
-  EPSON TM-L90
-  EPSON TM-T88IV
-  EPSON TM-T90
-  EPSON TM-T90KP
+  詳細は Epson ePOS SDK for iOS ユーザーズマニュアル を参照ください
 
 サポートインターフェイス
   TMプリンター
@@ -162,6 +112,8 @@ ePOS SDK には、Androidデバイス向けの Epson ePOS SDK for Android も用
 ・印刷処理を繰り返し行う場合、Printerクラスのインスタンスの生成と破棄は繰り返し処理の外で行い、
   短い間隔で繰り返さないようにしてください。
 
+・addTextLang APIを使用する場合、印刷データごとに先頭で指定してください
+
 4.制限事項
 
 ・以下のTMインテリジェントプリンターでは検索機能(Discoveryクラス)
@@ -183,6 +135,41 @@ ePOS SDK には、Androidデバイス向けの Epson ePOS SDK for Android も用
   connectを実行する前に100msec程度のWaitを入れてください。
 
 5.バージョン履歴
+  Version 2.17.1
+    ・対応iOS/iPadOSバージョンを追加
+      ・iOS 14.2
+      ・iPadOS 14.2
+    ・iOS14におけるプリンタの検索処理を改善しました
+    ・不具合修正
+      ・TM-m30IIでページモードを使用した際にレイアウトが崩れる現象を修正(ESC/POS制御時)
+
+
+  Version 2.17.0
+    ・対応iOS/iPadOSバージョンを追加
+      ・iOS 14.1
+      ・iPadOS 14.1
+    ・対応iOSバージョンからiOS10.xを削除
+    ・対応iOS/iPadOS端末から以下を削除
+      ・iPhone 5 / 5c
+      ・iPad 第4世代
+    ・サポートカスタマーディスプレイを追加
+      ・DM-D70
+    ・新機能追加
+      ・PrinterクラスにGetPrinterInformation APIを追加
+      ・CATクラスにAPIを追加
+
+  Version 2.16.0
+    ・対応iOS/iPadOSバージョンを追加
+      ・iOS 13.3.1 - 13.6
+      ・iPadOS 13.3.1 - 13.6
+    ・サポートTMプリンターを追加
+      ・TM-m30II-S
+      ・TM-m30II-NT(海外モデルのみ)
+      ・TM-m50(海外モデルのみ)
+    ・不具合修正
+      ・再接続中に端末をスリープに入れると再接続が終わらない場合がある現象を修正   
+    ・新機能追加
+      ・addBarcode APIにCODE128 autoパラメータを追加
 
   Version 2.14.0
     ・対応iOS/iPadOSバージョンを追加

@@ -1,7 +1,7 @@
 =========================================================================
-          Epson ePOS SDK for iOS Version 2.14.0
+          Epson ePOS SDK for iOS Version 2.17.1
 
-          Copyright (C) Seiko Epson Corporation 2015 - 2020. All rights reserved.
+          Copyright (C) Seiko Epson Corporation 2015 - 2021. All rights reserved.
 =========================================================================
 
 1. About this software
@@ -15,76 +15,26 @@ Epson ePOS SDK.
 For detailed information, please see Epson ePOS SDK for iOS User's Manual.
 
 iOS/iPadOS Versions
-  iOS 10.0.1
-  iOS 10.2 to 10.3.2
   iOS 11 to 11.4.1
   iOS 12 to 12.4.3
-  iOS 13 to 13.3
-  iPadOS 13.1 to 13.3
+  iOS 13 to 13.7
+  iOS 14 to 14.1
+  iPadOS 13.1 to 13.7
+  iPadOS 14 to 14.2
 
 iOS/iPadOS Devices
-  iPhone ( 5 / 5c / 5s / 6 / 6 Plus / 6s / 6s Plus / SE / 7 / 7 Plus / 8 / 8 Plus / X )
+  iPhone ( 5s / 6 / 6 Plus / 6s / 6s Plus / SE / 7 / 7 Plus / 8 / 8 Plus / X )
   iPod touch ( 6th generation )
-  iPad ( 4th generation / 5th generation / 6th generation )
+  iPad ( 5th generation / 6th generation / 7th generation )
   iPad Pro ( 12.9-inch / 9.7-inch / 12.9-inch 2nd / 10.5-inch)
-  iPad Air / iPad Air 2
-  iPad mini 2 (iPad mini with Retina display) / iPad mini 3 / iPad mini 4
+  iPad Air / iPad Air 2 / iPad Air 3
+  iPad mini 2 (iPad mini with Retina display) / iPad mini 3 / iPad mini 4 / iPad mini 5
 
 Confirmation XCode Version
-  XCode11.3
+  XCode12.1
 
 Supported TM Printers
-  EPSON TM-T100
-  EPSON TM-T20
-  EPSON TM-T20II
-  EPSON TM-T20III
-  EPSON TM-T20IIIL
-  EPSON TM-T20X
-  EPSON TM-T60
-  EPSON TM-T70
-  EPSON TM-T70II
-  EPSON TM-T81II
-  EPSON TM-T81III
-  EPSON TM-T82
-  EPSON TM-T82X
-  EPSON TM-T82II
-  EPSON TM-T82III
-  EPSON TM-T82IIIL
-  EPSON TM-T83III
-  EPSON TM-T88V
-  EPSON TM-T88VI
-  EPSON TM-T90II
-  EPSON TM-P20
-  EPSON TM-P60
-  EPSON TM-P60II
-  EPSON TM-P80
-  EPSON TM-U220 series
-  EPSON TM-U330 series
-  EPSON TM-m10
-  EPSON TM-m30
-  EPSON TM-m30II
-  EPSON TM-m30II-H
-  EPSON TM-H6000V
-
-Supported TM Intelligent Printers
-  EPSON TM-T20II-i
-  EPSON TM-T70-i
-  EPSON TM-T82II-i
-  EPSON TM-T83II-i
-  EPSON TM-T88V-i
-  EPSON TM-T88VI-iHUB
-  EPSON TM-U220-i
-  EPSON TM-T70II-DT
-  EPSON TM-T88V-DT
-  EPSON TM-H6000IV-DT
-  EPSON TM-T70II-DT2
-  EPSON TM-T88VI-DT2
-
-Supported Network Printers
-  EPSON TM-L90
-  EPSON TM-T88IV
-  EPSON TM-T90
-  EPSON TM-H6000IV
+  For detailed information, please see Epson ePOS SDK for iOS User's Manual.
 
 Supported Interfaces
   TM Printer
@@ -164,6 +114,8 @@ Supported Interfaces
 - When printing process is repeated, create and destroy the instance of Printer class
   outside the iteration process and do not repeat it at short intervals.
 
+- Call addTextLang API in first on each print data.
+
 4. Restriction
 
 - Discovery function of the following TM Intelligent printer doesn't support.
@@ -184,6 +136,40 @@ Supported Interfaces
   about 100 msec before executing connect API.
 
 5. Version History
+  Version 2.17.1
+    - Added support iOS/iPadOS versions
+      - iOS 14.2
+      - iPadOS 14.2
+    - Improved printer search function on iOS 14
+    - Bug fix
+      - Fixed issue that the print layout is broken when page mode is used on TM-m30II(during ESC/POS control)
+
+  Version 2.17.0
+    - Added support iOS/iPadOS versions
+      - iOS 14.1
+      - iPadOS 14.1
+    - iOS 10.x was removed from support OS
+    - Removed support iOS/iPadOS Devices
+      - iPhone 5 / 5c
+      - iPad 4th generation
+    - Added customer display support
+      - DM-D70
+    - Added new functions
+      - Added GetPrinterInformation API in Printer Class. 
+    - Improved performance of operate API in GermanyFiscalElement class. 
+
+  Version 2.16.0
+    - Added support iOS/iPadOS versions
+      - iOS 13.3.1 - 13.6
+      - iPadOS 13.3.1 - 13.6
+    - Added TM printer support
+      - TM-m30II-S
+      - TM-m30II-NT
+      - TM-m50
+    - Bug fix
+      - Fixed issue that the ePOS SDK's reconnecting process doesn't end rarely　when the iOS device go into sleep mode during the ePOS SDK's reconnectiong process. 
+    - Added new functions
+      - Added "CODE128 auto" parameter on addBarcode API. 
 
   Version 2.14.0
     - Added support iOS/iPadOS versions

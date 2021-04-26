@@ -1,7 +1,7 @@
 //
-//  Copyright (C) Seiko Epson Corporation 2016 - 2020. All rights reserved.
+//  Copyright (C) Seiko Epson Corporation 2016 - 2021. All rights reserved.
 //
-//  ePOS SDK Ver.2.14.0
+//  ePOS SDK Ver.2.17.1
 
 #ifdef __OBJC__
 #import <Foundation/Foundation.h>
@@ -13,6 +13,7 @@
 #define EPOS2_PARAM_UNSPECIFIED (-1)
 #define EPOS2_PARAM_DEFAULT (-2)
 #define EPOS2_UNKNOWN (-3)
+#define EPOS2_PARAM_UNUSE (-4)
 
 // virtual keycode
 #define EPOS2_VK_BACK         (0x08)
@@ -121,6 +122,7 @@ enum Epos2ErrorStatus : int {
     EPOS2_ERR_BOX_CLIENT_OVER,
     EPOS2_ERR_UNSUPPORTED,
     EPOS2_ERR_DEVICE_BUSY,
+    EPOS2_ERR_RECOVERY_FAILURE,
     EPOS2_ERR_FAILURE = 255
 };
 
@@ -196,11 +198,14 @@ enum Epos2PrinterSeries : int {
     EPOS2_TM_T83III,
     EPOS2_TM_T100,
     EPOS2_TM_M30II,
+    EPOS2_TS_100,
+    EPOS2_TM_M50,
 };
 enum Epos2DisplayModel : int {
     EPOS2_DM_D30 = 0,
     EPOS2_DM_D110,
 	EPOS2_DM_D210,
+    EPOS2_DM_D70,
 };
 
 enum Epos2ModelLang : int {
@@ -394,7 +399,8 @@ enum Epos2Barcode : int {
     EPOS2_BARCODE_GS1_DATABAR_OMNIDIRECTIONAL,
     EPOS2_BARCODE_GS1_DATABAR_TRUNCATED,
     EPOS2_BARCODE_GS1_DATABAR_LIMITED,
-    EPOS2_BARCODE_GS1_DATABAR_EXPANDED
+    EPOS2_BARCODE_GS1_DATABAR_EXPANDED,
+    EPOS2_BARCODE_CODE128_AUTO
 };
 
 enum Epos2Hri : int {
@@ -563,6 +569,42 @@ enum Epos2CursorType : int {
     EPOS2_CURSOR_UNDERLINE
 };
 
+enum Epos2LayoutMode : int {
+    EPOS2_LAYOUT_MODE_1 = 0,
+    EPOS2_LAYOUT_MODE_2,
+    EPOS2_LAYOUT_MODE_3,
+    EPOS2_LAYOUT_MODE_4,
+    EPOS2_LAYOUT_MODE_5,
+    EPOS2_LAYOUT_MODE_6,
+    EPOS2_LAYOUT_MODE_7,
+    EPOS2_LAYOUT_MODE_8,
+    EPOS2_LAYOUT_MODE_9,
+    EPOS2_LAYOUT_MODE_10,
+    EPOS2_LAYOUT_MODE_11,
+    EPOS2_LAYOUT_MODE_12,
+    EPOS2_LAYOUT_MODE_13,
+    EPOS2_LAYOUT_MODE_14,
+    EPOS2_LAYOUT_MODE_15,
+    EPOS2_LANDSCAPE_LAYOUT_MODE_1,
+    EPOS2_LANDSCAPE_LAYOUT_MODE_2,
+    EPOS2_LANDSCAPE_LAYOUT_MODE_3,
+    EPOS2_LANDSCAPE_LAYOUT_MODE_4,
+    EPOS2_LANDSCAPE_LAYOUT_MODE_5,
+    EPOS2_PORTRAIT_LAYOUT_MODE_1,
+    EPOS2_PORTRAIT_LAYOUT_MODE_2,
+    EPOS2_PORTRAIT_LAYOUT_MODE_3,
+    EPOS2_PORTRAIT_LAYOUT_MODE_4,
+    EPOS2_PORTRAIT_LAYOUT_MODE_5,
+    EPOS2_PORTRAIT_LAYOUT_MODE_6,
+    EPOS2_PORTRAIT_LAYOUT_MODE_7
+};
+
+enum Epos2RowType : int {
+    EPOS2_EVEN_ROWS = -10,
+    EPOS2_ODD_ROWS = -11,
+    EPOS2_ALL_ROWS = -12
+};
+
 enum Epos2CountMode : int {
     EPOS2_COUNT_MODE_MANUAL_INPUT = 0,
     EPOS2_COUNT_MODE_AUTO_COUNT
@@ -638,7 +680,9 @@ enum Epos2CATCallbackCode : int {
     EPOS2_CAT_CODE_ERR_DEVICE,
     EPOS2_CAT_CODE_ERR_SYSTEM,
     EPOS2_CAT_CODE_ERR_TIMEOUT,
-    EPOS2_CAT_CODE_ERR_FAILURE
+    EPOS2_CAT_CODE_ERR_FAILURE,
+    EPOS2_CAT_CODE_ERR_COMMAND,
+    EPOS2_CAT_CODE_ABORT_FAILURE
 };
 
 enum Epos2CATService : int {
@@ -652,7 +696,10 @@ enum Epos2CATService : int {
     EPOS2_SERVICE_SUICA,
     EPOS2_SERVICE_WAON,
     EPOS2_SERVICE_POINT,
-    EPOS2_SERVICE_COMMON
+    EPOS2_SERVICE_COMMON,
+    EPOS2_SERVICE_NFCPAYMENT,
+    EPOS2_SERVICE_PITAPA,
+    EPOS2_SERVICE_FISC
 };
 
 enum Epos2CATPaymentCondition : int {
@@ -668,6 +715,11 @@ enum Epos2CATPaymentCondition : int {
     EPOS2_PAYMENT_CONDITION_DEBIT,
     EPOS2_PAYMENT_CONDITION_ELECTRONIC_MONEY,
     EPOS2_PAYMENT_CONDITION_OTHER,
+    EPOS2_PAYMENT_CONDITION_BONUS_4,
+    EPOS2_PAYMENT_CONDITION_BONUS_5,
+    EPOS2_PAYMENT_CONDITION_INSTALLMENT_3,
+    EPOS2_PAYMENT_CONDITION_COMBINATION_3,
+    EPOS2_PAYMENT_CONDITION_COMBINATION_4,
 };
 
 enum Epos2CATStatusUpdateEvent : int {
@@ -925,6 +977,21 @@ enum Epos2PrinterSettingPrintSpeed : int {
 - (void) onCATStatusUpdate:(Epos2CAT *)catObj status:(long)status;
 @end
 
+@protocol Epos2CATDirectIODelegate <NSObject>
+@required
+- (void) onCATDirectIO:(Epos2CAT *)catObj eventNumber:(long)eventNumber data:(long)data string:(NSString *)string;
+@end
+
+@protocol Epos2CATCheckConnectionDelegate <NSObject>
+@required
+- (void) onCATCheckConnection:(Epos2CAT *)catObj code:(int)code additionalSecurityInformation:(NSString *)asi;
+@end
+
+@protocol Epos2CATClearOutputDelegate <NSObject>
+@required
+- (void) onCATClearOutput:(Epos2CAT *)catObj code:(int)code  abortCode:(long)abortCode;
+@end
+
 @protocol Epos2MSRDataDelegate <NSObject>
 @required
 - (void) onMSRData:(Epos2MSR *)msrObj data:(Epos2MSRData *)data;
@@ -975,6 +1042,11 @@ enum Epos2PrinterSettingPrintSpeed : int {
 @required
 - (void) onGetPrinterSetting:(int)code type:(int)type value:(int)value;
 - (void) onSetPrinterSetting:(int)code;
+@end
+
+@protocol Epos2PrinterInformationDelegate <NSObject>
+@required
+- (void) onGetPrinterInformation:(int)code jsonString:(NSString *)jsonString;
 @end
 
 @interface Epos2CommonPrinter : NSObject
@@ -1072,6 +1144,7 @@ enum Epos2PrinterSettingPrintSpeed : int {
 - (int) resetMaintenanceCounter:(long)timeout type:(int)Type delegate:(id<Epos2MaintenanceCounterDelegate>)delegate;
 - (int) getPrinterSetting:(long)timeout type:(int)Type delegate:(id<Epos2PrinterSettingDelegate>)delegate;
 - (int) setPrinterSetting:(long)timeout setttingList:(NSDictionary *)list delegate:(id<Epos2PrinterSettingDelegate>)delegate;
+- (int) getPrinterInformation:(long)timeout delegate:(id<Epos2PrinterInformationDelegate>)delegate;
 @end
 
 @interface Epos2HybridPrinterStatusInfo : NSObject
@@ -1148,6 +1221,7 @@ enum Epos2PrinterSettingPrintSpeed : int {
 - (int) addText:(NSString *)data lang:(int)lang;
 - (int) addText:(NSString *)data x:(long)x y:(long)y;
 - (int) addText:(NSString *)data x:(long)x y:(long)y lang:(int)lang;
+- (int) addText:(NSString *)data x:(long)x y:(long)y lang:(int)lang r:(long)r g:(long)g b:(long)b;
 - (int) addReverseText:(NSString *)data;
 - (int) addReverseText:(NSString *)data lang:(int)lang;
 - (int) addReverseText:(NSString *)data x:(long)x y:(long)y;
@@ -1157,6 +1231,21 @@ enum Epos2PrinterSettingPrintSpeed : int {
 - (int) addSetBrightness:(int)brightness;
 - (int) addShowClock;
 - (int) addCommand:(NSData *)data;
+- (int) addCreateScreen:(int)mode;
+- (int) addCreateScreenCustom:(int)mode column:(long)column row:(long)row;
+- (int) addBackgroundColor:(int)row r:(long)r g:(long)g b:(long)b;
+- (int) addStartSlideShow:(long)interval;
+- (int) addStopSlideShow;
+- (int) addSymbol:(NSString *)data type:(int)type level:(int)level width:(long)width height:(long)height dotX:(long)dotX dotY:(long)dotY quietZone:(int)quietZone;
+- (int) addDownloadImage:(long)key1 key2:(long)key2 dotX:(long)dotX dotY:(long)dotY width:(long)width height:(long)height;
+- (int) addRegisterDownloadImage:(NSData*) data key1:(long)key1 key2:(long)key2;
+- (int) addNVImage:(long)key1 key2:(long)key2 dotX:(long)dotX dotY:(long)dotY width:(long)width height:(long)height;
+- (int) addClearImage;
+- (int) addClearSymbol;
+- (int) addCreateTextArea:(long)number x:(long)x y:(long)y width:(long)width height:(long)height scrollMode:(int)scrollMode;
+- (int) addDestroyTextArea:(long)number;
+- (int) addSetCurrentTextArea:(long)number;
+- (int) addClearCurrentTextArea;
 
 - (void) setReceiveEventDelegate:(id<Epos2DispReceiveDelegate>)delegate;
 
@@ -1321,6 +1410,8 @@ enum Epos2PrinterSettingPrintSpeed : int {
 @property(nonatomic, readonly, getter=getPaymentCondition) int paymentCondition;
 @property(nonatomic, readonly, copy, getter=getVoidSlipNumber) NSString * voidSlipNumber;
 @property(nonatomic, readonly, getter=getBalance) long balance;
+@property(nonatomic, readonly, getter=getAdditionalSecurityInformation) NSString * additionalSecurityInformation;
+@property(nonatomic, readonly, getter=getTransactionType) NSString * transactionType;
 @end
 
 @interface Epos2CATDailyLog : NSObject
@@ -1356,11 +1447,18 @@ enum Epos2PrinterSettingPrintSpeed : int {
 
 - (int) getOposErrorCode;
 - (int) authorizeSales:(int)service totalAmount:(long)totalAmount sequence:(long)sequence;
+- (int) authorizeSales:(int)service totalAmount:(long)totalAmount amount:(long)amount tax:(long)tax sequence:(long)sequence additionalSecurityInformation:(NSString*) asi;
 - (int) authorizeVoid:(int)service totalAmount:(long)totalAmount sequence:(long)sequence;
+- (int) authorizeVoid:(int)service totalAmount:(long)totalAmount amount:(long)amount tax:(long)tax sequence:(long)sequence additionalSecurityInformation:(NSString*) asi;
 - (int) authorizeRefund:(int)service totalAmount:(long)totalAmount sequence:(long)sequence;
 - (int) authorizeCompletion:(int)service totalAmount:(long)totalAmount sequence:(long)sequence;
+- (int) authorizeCompletion:(int)service totalAmount:(long)totalAmount amount:(long)amount tax:(long)tax sequence:(long)sequence additionalSecurityInformation:(NSString*) asi;
 - (int) accessDailyLog:(int)service sequence:(long)sequence;
+- (int) accessDailyLog:(int)service sequence:(long)sequence dailyLogType:(NSString *)dailyLogType additionalSecurityInformation:(NSString*) asi;
 - (int) sendDirectIOCommand:(long)command data:(long)data string:(NSString *)string service:(int)service;
+- (int) sendDirectIOCommand:(long)command data:(long)data string:(NSString *)string service:(int)service additionalSecurityInformation:(NSString*) asi;
+- (int) checkConnection:(NSString*) asi;
+- (int) clearOutput;
 
 - (void) setAuthorizeSalesEventDelegate:(id<Epos2CATAuthorizeSalesDelegate>)delegate;
 - (void) setAuthorizeVoidEventDelegate:(id<Epos2CATAuthorizeVoidDelegate>)delegate;
@@ -1369,7 +1467,9 @@ enum Epos2PrinterSettingPrintSpeed : int {
 - (void) setAccessDailyLogEventDelegate:(id<Epos2CATAccessDailyLogDelegate>)delegate;
 - (void) setDirectIOCommandReplyEventDelegate:(id<Epos2CATDirectIOCommandReplyDelegate>)delegate;
 - (void) setStatusUpdateEventDelegate:(id<Epos2CATStatusUpdateDelegate>)delegate;
-
+- (void) setDirectIOEventDelegate:(id<Epos2CATDirectIODelegate>)delegate;
+- (void) setCheckConnectionEventDelegate:(id<Epos2CATCheckConnectionDelegate>)delegate;
+- (void) setClearOutputEventDelegate:(id<Epos2CATClearOutputDelegate>)delegate;
 - (void) setConnectionEventDelegate:(id<Epos2ConnectionDelegate>)delegate;
 - (NSString *) getAdmin;
 - (NSString *) getLocation;
