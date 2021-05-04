@@ -13,7 +13,7 @@ Pod::Spec.new do |s|
   s.homepage     = 'https://download.epson-biz.com/modules/pos/index.php?page=soft&pcat=3&scat=50'
   s.license      = { :type => 'Commercial', :file => 'LICENSE' }
   s.author       = { 'SEIKO EPSON CORPORATION' => 'contact@epson.com' }
-  s.platform     = :ios, '12.0'
+  s.platform     = :ios, '11.4'
   s.source       = { :git => 'https://github.com/popina/EpsonSDK.git', :tag => s.version.to_s }
   s.source_files  = 'ePOS2.h'
   s.preserve_paths = 'libepos2.a'
