@@ -14,10 +14,10 @@ Pod::Spec.new do |s|
   s.license      = { :type => 'Commercial', :file => 'LICENSE' }
   s.author       = { 'SEIKO EPSON CORPORATION' => 'contact@epson.com' }
   s.platform     = :ios, '11.4'
-  s.source       = { :git => 'https://github.com/popina/EpsonSDK.git', :tag => s.version.to_s }
-  s.source_files  = 'ePOS2.h'
-  s.preserve_paths = 'libepos2.a'
+  s.source       = { :git => 'https://github.com/popina/EpsonSDK.git', :branch => 'swift-package' }
+  s.source_files  = 'Sources/EpsonSDK/include/ePOS2.h'
+  s.preserve_paths = 'Sources/EpsonSDK/Resources/libepos2.a'
   s.frameworks = 'UIKit', 'CoreGraphics', 'ExternalAccessory'
   s.library   = 'epos2', 'z', 'xml2.2'
-  s.xcconfig  =  { 'LIBRARY_SEARCH_PATHS' => '"$(PODS_ROOT)/EpsonSDK"' }
+  s.xcconfig  =  { 'LIBRARY_SEARCH_PATHS' => '"$(PODS_ROOT)/EpsonSDK/Sources/EpsonSDK/Resources"' }
 end
