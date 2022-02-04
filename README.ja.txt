@@ -1,5 +1,5 @@
 =========================================================================
-          Epson ePOS SDK for iOS Version 2.17.1
+          Epson ePOS SDK for iOS Version 2.19.0
 
           Copyright (C) Seiko Epson Corporation 2015 - 2021. All rights reserved.
 =========================================================================
@@ -17,17 +17,9 @@ ePOS SDK には、Androidデバイス向けの Epson ePOS SDK for Android も用
   iOS 11 - 11.4.1
   iOS 12 - 12.4.3
   iOS 13 - 13.7
-  iOS 14 - 14.1
+  iOS 14 - 14.6
   iPadOS 13.1 - 13.7
-  iPadOS 14 - 14.2
-
-対応iOS/iPadOS端末
-  iPhone ( 5s / 6 / 6 Plus / 6s / 6s Plus / SE / 7 / 7 Plus / 8 / 8 Plus / X )
-  iPod touch ( 第6世代 )
-  iPad ( 第5世代 / 第6世代 / 第7世代 )
-  iPad Pro ( 12.9-inch / 9.7-inch / 12.9-inch 2nd / 10.5-inch)
-  iPad Air / iPad Air 2 / iPad Air 3
-  iPad mini 2 (iPad mini with Retina display) / iPad mini 3 / iPad mini 4 / iPad mini 5
+  iPadOS 14 - 14.6
 
 動作確認XCodeバージョン
   XCode12.1
@@ -92,6 +84,9 @@ ePOS SDK には、Androidデバイス向けの Epson ePOS SDK for Android も用
 ・TM-DT_Peripherals_en_revx.pdf
   TM-DT シリーズ周辺機器制御ガイド（英語版）です。
 
+・JSON_Spec_sheet_revx.pdf
+  JSON仕様シートです。
+
 ・README.ja.txt
   本書です。
 
@@ -135,6 +130,21 @@ ePOS SDK には、Androidデバイス向けの Epson ePOS SDK for Android も用
   connectを実行する前に100msec程度のWaitを入れてください。
 
 5.バージョン履歴
+  Version 2.19.0
+    ・対応iOS/iPadOSバージョンを追加
+      ・iOS 14.5, 14.6
+      ・iPadOS 14.5, 14.6
+
+  Version 2.18.0
+    ・対応iOS/iPadOSバージョンを追加
+      ・iOS 14.4
+      ・iPadOS 14.4
+    ・サポートTMプリンターを追加
+      ・TM-T88VII
+    ・プリンターの検索処理速度を改善
+    ・不具合修正
+      ・複数クラス同時使用時にプリンター電源OFFされたまま使い続けると稀にクラッシュする現象を修正
+
   Version 2.17.1
     ・対応iOS/iPadOSバージョンを追加
       ・iOS 14.2

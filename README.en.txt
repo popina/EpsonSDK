@@ -1,5 +1,5 @@
 =========================================================================
-          Epson ePOS SDK for iOS Version 2.17.1
+          Epson ePOS SDK for iOS Version 2.19.0
 
           Copyright (C) Seiko Epson Corporation 2015 - 2021. All rights reserved.
 =========================================================================
@@ -18,17 +18,9 @@ iOS/iPadOS Versions
   iOS 11 to 11.4.1
   iOS 12 to 12.4.3
   iOS 13 to 13.7
-  iOS 14 to 14.1
+  iOS 14 to 14.6
   iPadOS 13.1 to 13.7
-  iPadOS 14 to 14.2
-
-iOS/iPadOS Devices
-  iPhone ( 5s / 6 / 6 Plus / 6s / 6s Plus / SE / 7 / 7 Plus / 8 / 8 Plus / X )
-  iPod touch ( 6th generation )
-  iPad ( 5th generation / 6th generation / 7th generation )
-  iPad Pro ( 12.9-inch / 9.7-inch / 12.9-inch 2nd / 10.5-inch)
-  iPad Air / iPad Air 2 / iPad Air 3
-  iPad mini 2 (iPad mini with Retina display) / iPad mini 3 / iPad mini 4 / iPad mini 5
+  iPadOS 14 to 14.6
 
 Confirmation XCode Version
   XCode12.1
@@ -95,6 +87,9 @@ Supported Interfaces
 - TM-DT_Peripherals_ja_revx.pdf
   This is the TM-DT Series Peripheral Device Control Guide (The Japanese-language edition)
 
+- JSON_Spec_sheet_revx.pdf
+  JSON specification sheet
+
 - README.en.txt
   This file
 
@@ -136,6 +131,23 @@ Supported Interfaces
   about 100 msec before executing connect API.
 
 5. Version History
+  Version 2.19.0
+    - Added support iOS/iPadOS versions
+      - iOS 14.5, 14.6
+      - iPadOS 14.5, 14.6
+    - Added TM printer support
+      - TM-L90 Liner-Free Label Printer Model
+
+  Version 2.18.0
+    - Added support iOS/iPadOS versions
+      - iOS 14.4
+      - iPadOS 14.4
+    - Added TM printer support
+      - TM-T88VII
+    - Improved printer search speed.
+    - Bug fix
+      - Fixed a rare crash when using multiple classes at the same time with the printer turned off.
+
   Version 2.17.1
     - Added support iOS/iPadOS versions
       - iOS 14.2
@@ -167,7 +179,7 @@ Supported Interfaces
       - TM-m30II-NT
       - TM-m50
     - Bug fix
-      - Fixed issue that the ePOS SDK's reconnecting process doesn't end rarely　when the iOS device go into sleep mode during the ePOS SDK's reconnectiong process. 
+      - Fixed issue that the ePOS SDK's reconnecting process doesn't end rarely　when the iOS device go into sleep mode during the ePOS SDK's reconnecting process. 
     - Added new functions
       - Added "CODE128 auto" parameter on addBarcode API. 
 

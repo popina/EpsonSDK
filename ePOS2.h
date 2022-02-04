@@ -1,7 +1,7 @@
 //
 //  Copyright (C) Seiko Epson Corporation 2016 - 2021. All rights reserved.
 //
-//  ePOS SDK Ver.2.17.1
+//  ePOS SDK Ver.2.19.0
 
 #ifdef __OBJC__
 #import <Foundation/Foundation.h>
@@ -172,6 +172,8 @@ enum Epos2CallbackCode : int {
     EPOS2_CODE_ERR_DATA_CORRUPTED,
     EPOS2_CODE_ERR_PARAM,
     EPOS2_CODE_RETRY,
+    EPOS2_CODE_ERR_RECOVERY_FAILURE,
+    EPOS2_CODE_ERR_JSON_FORMAT,
     EPOS2_CODE_ERR_FAILURE = 255
 };
 
@@ -200,6 +202,8 @@ enum Epos2PrinterSeries : int {
     EPOS2_TM_M30II,
     EPOS2_TS_100,
     EPOS2_TM_M50,
+    EPOS2_TM_T88VII,
+    EPOS2_TM_L90LFC,
 };
 enum Epos2DisplayModel : int {
     EPOS2_DM_D30 = 0,
@@ -270,6 +274,11 @@ enum Epos2BatteryLevel : int {
     EPOS2_BATTERY_LEVEL_6,
 };
 
+enum Epos2UnrecoverError : int {
+    EPOS2_HIGH_VOLTAGE_ERR,
+    EPOS2_LOW_VOLTAGE_ERR,
+};
+
 enum Epos2InsertionWaiting : int {
     EPOS2_INSERTION_WAIT_SLIP = 0,
     EPOS2_INSERTION_WAIT_VALIDATION,
@@ -308,6 +317,9 @@ enum Epos2StatusEvent : int {
     EPOS2_EVENT_REMOVAL_WAIT_NONE,
     EPOS2_EVENT_SLIP_PAPER_OK,
     EPOS2_EVENT_SLIP_PAPER_EMPTY,
+    EPOS2_EVENT_AUTO_RECOVER_ERROR,
+    EPOS2_EVENT_AUTO_RECOVER_OK,
+    EPOS2_EVENT_UNRECOVERABLE_ERROR,
 };
 
 enum Epos2ConnectionEvent : int {
@@ -793,7 +805,10 @@ enum Epos2PrinterSettingPrintSpeed : int {
     EPOS2_PRINTER_SETTING_PRINTSPEED_11 = 11,
     EPOS2_PRINTER_SETTING_PRINTSPEED_12 = 12,
     EPOS2_PRINTER_SETTING_PRINTSPEED_13 = 13,
-    EPOS2_PRINTER_SETTING_PRINTSPEED_14 = 14
+    EPOS2_PRINTER_SETTING_PRINTSPEED_14 = 14,
+    EPOS2_PRINTER_SETTING_PRINTSPEED_15 = 15,
+    EPOS2_PRINTER_SETTING_PRINTSPEED_16 = 16,
+    EPOS2_PRINTER_SETTING_PRINTSPEED_17 = 17
 };
 
 
@@ -1044,9 +1059,19 @@ enum Epos2PrinterSettingPrintSpeed : int {
 - (void) onSetPrinterSetting:(int)code;
 @end
 
+@protocol Epos2PrinterGetPrinterSettingExDelegate <NSObject>
+@required
+- (void) onGetPrinterSettingEx:(Epos2Printer *)printerObj code:(int)code jsonString:(NSString *)jsonString;
+@end
+
 @protocol Epos2PrinterInformationDelegate <NSObject>
 @required
 - (void) onGetPrinterInformation:(int)code jsonString:(NSString *)jsonString;
+@end
+
+@protocol Epos2PrinterSetPrinterSettingExDelegate <NSObject>
+@required
+- (void) onSetPrinterSettingEx:(Epos2Printer *)printerObj code:(int)code;
 @end
 
 @interface Epos2CommonPrinter : NSObject
@@ -1102,6 +1127,8 @@ enum Epos2PrinterSettingPrintSpeed : int {
 @property(readonly, getter=getBuzzer) int buzzer;
 @property(readonly, getter=getAdapter) int adapter;
 @property(readonly, getter=getBatteryLevel) int batteryLevel;
+@property(readonly, getter=getRemovalWaiting) int removalWaiting;
+@property(readonly, getter=getUnrecoverError) int unrecoverError;
 @end
 
 @interface Epos2Printer : Epos2CommonPrinter
@@ -1126,6 +1153,8 @@ enum Epos2PrinterSettingPrintSpeed : int {
 
 - (void) setStatusChangeEventDelegate:(id<Epos2PtrStatusChangeDelegate>)delegate;
 - (void) setReceiveEventDelegate:(id<Epos2PtrReceiveDelegate>)delegate;
+//- (void) setGetPrinterSettingExEventDelegate:(id<Epos2PrinterGetPrinterSettingExDelegate>)delegate;
+//- (void) setSetPrinterSettingExDelegate:(id<Epos2PrinterSetPrinterSettingExDelegate>)delegate;
 
 - (int) setInterval:(long)interval;
 - (long) getInterval;
@@ -1144,6 +1173,8 @@ enum Epos2PrinterSettingPrintSpeed : int {
 - (int) resetMaintenanceCounter:(long)timeout type:(int)Type delegate:(id<Epos2MaintenanceCounterDelegate>)delegate;
 - (int) getPrinterSetting:(long)timeout type:(int)Type delegate:(id<Epos2PrinterSettingDelegate>)delegate;
 - (int) setPrinterSetting:(long)timeout setttingList:(NSDictionary *)list delegate:(id<Epos2PrinterSettingDelegate>)delegate;
+//- (int) getPrinterSettingEx:(long)timeout;
+//- (int) setPrinterSettingEx:(long)timeout jsonString:(NSString *)jsonString;
 - (int) getPrinterInformation:(long)timeout delegate:(id<Epos2PrinterInformationDelegate>)delegate;
 @end
 
