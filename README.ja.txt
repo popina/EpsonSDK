@@ -1,5 +1,5 @@
 =========================================================================
-          Epson ePOS SDK for iOS Version 2.19.0
+          Epson ePOS SDK for iOS Version 2.20.0
 
           Copyright (C) Seiko Epson Corporation 2015 - 2021. All rights reserved.
 =========================================================================
@@ -14,15 +14,16 @@ ePOS SDK には、Androidデバイス向けの Epson ePOS SDK for Android も用
 詳細は Epson ePOS SDK for iOS ユーザーズマニュアル を参照ください。
 
 対応iOS/iPadOSバージョン
-  iOS 11 - 11.4.1
-  iOS 12 - 12.4.3
+  iOS 12.5.5
   iOS 13 - 13.7
   iOS 14 - 14.6
+  iOS 15 - 15.0.2
   iPadOS 13.1 - 13.7
   iPadOS 14 - 14.6
+  iPadOS 15 - 15.0.2
 
 動作確認XCodeバージョン
-  XCode12.1
+  XCode13
 
 サポートTMプリンター
   詳細は Epson ePOS SDK for iOS ユーザーズマニュアル を参照ください
@@ -130,6 +131,18 @@ ePOS SDK には、Androidデバイス向けの Epson ePOS SDK for Android も用
   connectを実行する前に100msec程度のWaitを入れてください。
 
 5.バージョン履歴
+  Version 2.20.0
+    ・対応iOS/iPadOSバージョンを追加
+      ・iOS 12.5.5, 15.0 - 15.0.2
+      ・iPadOS 15.0 - 15.0.2
+    ・対応iOS/iPadOSバージョンを削除
+      ・iOS 11.*
+      ・iOS 12 - 12.4.3
+    ・サポートTMプリンターを追加
+      ・TM-L100
+    ・新機能追加
+      ・CATクラスにAPIを追加
+
   Version 2.19.0
     ・対応iOS/iPadOSバージョンを追加
       ・iOS 14.5, 14.6
@@ -152,7 +165,6 @@ ePOS SDK には、Androidデバイス向けの Epson ePOS SDK for Android も用
     ・iOS14におけるプリンタの検索処理を改善しました
     ・不具合修正
       ・TM-m30IIでページモードを使用した際にレイアウトが崩れる現象を修正(ESC/POS制御時)
-
 
   Version 2.17.0
     ・対応iOS/iPadOSバージョンを追加

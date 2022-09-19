@@ -1,5 +1,5 @@
 =========================================================================
-          Epson ePOS SDK for iOS Version 2.19.0
+          Epson ePOS SDK for iOS Version 2.20.0
 
           Copyright (C) Seiko Epson Corporation 2015 - 2021. All rights reserved.
 =========================================================================
@@ -15,15 +15,16 @@ Epson ePOS SDK.
 For detailed information, please see Epson ePOS SDK for iOS User's Manual.
 
 iOS/iPadOS Versions
-  iOS 11 to 11.4.1
-  iOS 12 to 12.4.3
+  iOS 12.5.5
   iOS 13 to 13.7
   iOS 14 to 14.6
+  iOS 15 to 15.0.2
   iPadOS 13.1 to 13.7
   iPadOS 14 to 14.6
+  iPadOS 15 to 15.0.2
 
 Confirmation XCode Version
-  XCode12.1
+  XCode13
 
 Supported TM Printers
   For detailed information, please see Epson ePOS SDK for iOS User's Manual.
@@ -131,6 +132,16 @@ Supported Interfaces
   about 100 msec before executing connect API.
 
 5. Version History
+  Version 2.20.0
+    - Added support iOS/iPadOS versions
+      - iOS 12.5.5, 15.0 - 15.0.2
+      - iPadOS 15.0 - 15.0.2
+    - Removed support iOS/iPadOS versions
+      - iOS 11.x
+      - iOS 12 - 12.4.3
+    - Added TM printer support
+      - TM-L100
+
   Version 2.19.0
     - Added support iOS/iPadOS versions
       - iOS 14.5, 14.6

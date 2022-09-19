@@ -1,7 +1,7 @@
 //
 //  Copyright (C) Seiko Epson Corporation 2016 - 2021. All rights reserved.
 //
-//  ePOS SDK Ver.2.19.0
+//  ePOS SDK Ver.2.20.0
 
 #ifdef __OBJC__
 #import <Foundation/Foundation.h>
@@ -204,6 +204,7 @@ enum Epos2PrinterSeries : int {
     EPOS2_TM_M50,
     EPOS2_TM_T88VII,
     EPOS2_TM_L90LFC,
+    EPOS2_TM_L100,
 };
 enum Epos2DisplayModel : int {
     EPOS2_DM_D30 = 0,
@@ -711,7 +712,8 @@ enum Epos2CATService : int {
     EPOS2_SERVICE_COMMON,
     EPOS2_SERVICE_NFCPAYMENT,
     EPOS2_SERVICE_PITAPA,
-    EPOS2_SERVICE_FISC
+    EPOS2_SERVICE_FISC,
+    EPOS2_SERVICE_QR,
 };
 
 enum Epos2CATPaymentCondition : int {
@@ -771,6 +773,8 @@ enum Epos2PrinterSettingType : int {
 enum Epos2PrinterSettingPaperWidth : int {
     EPOS2_PRINTER_SETTING_PAPERWIDTH_58_0 = 2,
     EPOS2_PRINTER_SETTING_PAPERWIDTH_60_0 = 3,
+    EPOS2_PRINTER_SETTING_PAPERWIDTH_70_0 = 4,
+    EPOS2_PRINTER_SETTING_PAPERWIDTH_76_0 = 5,
     EPOS2_PRINTER_SETTING_PAPERWIDTH_80_0 = 6
 };
 
@@ -1153,8 +1157,8 @@ enum Epos2PrinterSettingPrintSpeed : int {
 
 - (void) setStatusChangeEventDelegate:(id<Epos2PtrStatusChangeDelegate>)delegate;
 - (void) setReceiveEventDelegate:(id<Epos2PtrReceiveDelegate>)delegate;
-//- (void) setGetPrinterSettingExEventDelegate:(id<Epos2PrinterGetPrinterSettingExDelegate>)delegate;
-//- (void) setSetPrinterSettingExDelegate:(id<Epos2PrinterSetPrinterSettingExDelegate>)delegate;
+- (void) setGetPrinterSettingExDelegate:(id<Epos2PrinterGetPrinterSettingExDelegate>)delegate;
+- (void) setSetPrinterSettingExDelegate:(id<Epos2PrinterSetPrinterSettingExDelegate>)delegate;
 
 - (int) setInterval:(long)interval;
 - (long) getInterval;
@@ -1173,8 +1177,8 @@ enum Epos2PrinterSettingPrintSpeed : int {
 - (int) resetMaintenanceCounter:(long)timeout type:(int)Type delegate:(id<Epos2MaintenanceCounterDelegate>)delegate;
 - (int) getPrinterSetting:(long)timeout type:(int)Type delegate:(id<Epos2PrinterSettingDelegate>)delegate;
 - (int) setPrinterSetting:(long)timeout setttingList:(NSDictionary *)list delegate:(id<Epos2PrinterSettingDelegate>)delegate;
-//- (int) getPrinterSettingEx:(long)timeout;
-//- (int) setPrinterSettingEx:(long)timeout jsonString:(NSString *)jsonString;
+- (int) getPrinterSettingEx:(long)timeout;
+- (int) setPrinterSettingEx:(long)timeout jsonString:(NSString *)jsonString;
 - (int) getPrinterInformation:(long)timeout delegate:(id<Epos2PrinterInformationDelegate>)delegate;
 @end
 
@@ -1482,6 +1486,7 @@ enum Epos2PrinterSettingPrintSpeed : int {
 - (int) authorizeVoid:(int)service totalAmount:(long)totalAmount sequence:(long)sequence;
 - (int) authorizeVoid:(int)service totalAmount:(long)totalAmount amount:(long)amount tax:(long)tax sequence:(long)sequence additionalSecurityInformation:(NSString*) asi;
 - (int) authorizeRefund:(int)service totalAmount:(long)totalAmount sequence:(long)sequence;
+- (int) authorizeRefund:(int)service totalAmount:(long)totalAmount amount:(long)amount tax:(long)tax sequence:(long)sequence additionalSecurityInformation:(NSString*) asi;
 - (int) authorizeCompletion:(int)service totalAmount:(long)totalAmount sequence:(long)sequence;
 - (int) authorizeCompletion:(int)service totalAmount:(long)totalAmount amount:(long)amount tax:(long)tax sequence:(long)sequence additionalSecurityInformation:(NSString*) asi;
 - (int) accessDailyLog:(int)service sequence:(long)sequence;
