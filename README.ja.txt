@@ -1,7 +1,7 @@
 =========================================================================
-          Epson ePOS SDK for iOS Version 2.20.0
+          Epson ePOS SDK for iOS Version 2.23.0
 
-          Copyright (C) Seiko Epson Corporation 2015 - 2021. All rights reserved.
+          Copyright (C) Seiko Epson Corporation 2015 - 2022. All rights reserved.
 =========================================================================
 
 1.本ソフトウェアについて
@@ -14,16 +14,17 @@ ePOS SDK には、Androidデバイス向けの Epson ePOS SDK for Android も用
 詳細は Epson ePOS SDK for iOS ユーザーズマニュアル を参照ください。
 
 対応iOS/iPadOSバージョン
-  iOS 12.5.5
   iOS 13 - 13.7
   iOS 14 - 14.6
-  iOS 15 - 15.0.2
+  iOS 15 - 15.5
+  iOS 16 - 16.1
   iPadOS 13.1 - 13.7
   iPadOS 14 - 14.6
-  iPadOS 15 - 15.0.2
+  iPadOS 15 - 15.5
+  iPadOS 16.1
 
 動作確認XCodeバージョン
-  XCode13
+  XCode14.1
 
 サポートTMプリンター
   詳細は Epson ePOS SDK for iOS ユーザーズマニュアル を参照ください
@@ -34,6 +35,7 @@ ePOS SDK には、Androidデバイス向けの Epson ePOS SDK for Android も用
     無線LAN
     Bluetooth
     USB
+    BLE
   TMインテリジェントプリンター
     有線LAN
   ネットワークプリンター
@@ -42,16 +44,10 @@ ePOS SDK には、Androidデバイス向けの Epson ePOS SDK for Android も用
 
 2.提供ファイル
 
-・ePOS2.h
-  クラス定義、エラー値／デバイスタイプの定数定義を含むヘッダーファイルです。
-
-・ePOSEasySelect.h
-  簡単にプリンターを選択するためのヘッダーファイルです。
-
-・libepos2.a
+・libepos2.xcframework
   機能実行用ライブラリーです。（ARMv7, ARMv7s, ARM64, i386, x86_64 に対応）
 
-・libeposeasyselect.a
+・libeposeasyselect.xcframework
   簡単にプリンターを選択するためのライブラリーです。
   （ARMv7, ARMv7s, ARM64, i386, x86_64 に対応）
 
@@ -131,6 +127,28 @@ ePOS SDK には、Androidデバイス向けの Epson ePOS SDK for Android も用
   connectを実行する前に100msec程度のWaitを入れてください。
 
 5.バージョン履歴
+  Version 2.23.0
+    ・対応iOS/iPadOSバージョンを追加
+      ・iOS 16 - 16.1
+      ・iPadOS 16.1
+    ・対応iOS/iPadOSバージョンを削除
+      ・iOS 12.5.5
+    ・サポートTMプリンターを追加
+      ・TM-m30III
+      ・TM-m30III-H
+
+  Version 2.22.0
+    ・対応iOS/iPadOSバージョンを追加
+      ・iOS,iPadOS 15.1 - 15.5
+    ・サポートTMプリンターを追加
+      ・TM-P20II
+      ・TM-P80II
+    ・ライブラリファイル形式を xcframework に変更
+    ・新機能追加
+      ・PrinterクラスにverifyPassword APIを追加  
+      ・Printerクラスにプリンタのパスワードを指定可能なsetPrinterSettingEx APIを追加。パスワードを指定できないsetPrinterSettingEx APIは非推奨になりました
+      ・PrinterクラスのaddCut APIにフルカット関連のパラメータを追加
+
   Version 2.20.0
     ・対応iOS/iPadOSバージョンを追加
       ・iOS 12.5.5, 15.0 - 15.0.2

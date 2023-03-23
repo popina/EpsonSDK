@@ -1,7 +1,7 @@
 =========================================================================
-          Epson ePOS SDK for iOS Version 2.20.0
+          Epson ePOS SDK for iOS Version 2.23.0
 
-          Copyright (C) Seiko Epson Corporation 2015 - 2021. All rights reserved.
+          Copyright (C) Seiko Epson Corporation 2015 - 2022. All rights reserved.
 =========================================================================
 
 1. About this software
@@ -15,16 +15,17 @@ Epson ePOS SDK.
 For detailed information, please see Epson ePOS SDK for iOS User's Manual.
 
 iOS/iPadOS Versions
-  iOS 12.5.5
   iOS 13 to 13.7
   iOS 14 to 14.6
-  iOS 15 to 15.0.2
+  iOS 15 to 15.5
+  iOS 16 to 16.1
   iPadOS 13.1 to 13.7
   iPadOS 14 to 14.6
-  iPadOS 15 to 15.0.2
+  iPadOS 15 to 15.5
+  iPadOS 16.1
 
 Confirmation XCode Version
-  XCode13
+  XCode14.1
 
 Supported TM Printers
   For detailed information, please see Epson ePOS SDK for iOS User's Manual.
@@ -35,6 +36,7 @@ Supported Interfaces
     Wireless LAN
     Bluetooth
     USB
+    BLE
   TM Intelligent Printer
     Wired LAN
   Network Printers
@@ -43,18 +45,11 @@ Supported Interfaces
 
 2. Supplied Files
 
-- ePOS2.h
-  Header file that includes class definitions and error value / device type 
-  constant definitions.
-
-- ePOSEasySelect.h
-  Header file for selecting a printer easily
-
-- libepos2.a
+- libepos2.xcframework
   Library for function execution 
     (armv7, armv7s, arm64, i386, x86_64 supported)
 
-- libeposeasyselect.a
+- libeposeasyselect.xcframework
   Library for selecting a printer easily
     (armv7, armv7s, arm64, i386, x86_64 supported)
 
@@ -132,6 +127,28 @@ Supported Interfaces
   about 100 msec before executing connect API.
 
 5. Version History
+  Version 2.23.0
+    - Added support iOS/iPadOS versions
+      - iOS 16 - 16.1
+      - iPadOS 16.1
+    - Removed support iOS/iPadOS versions
+      - iOS 12.5.5
+    - Added TM printer support
+      - TM-m30III
+      - TM-m30III-H
+
+  Version 2.22.0
+    - Added support iOS/iPadOS versions
+      - iOS,iPadOS 15.1 - 15.5
+    - Added TM printer support
+      - TM-P20II
+      - TM-P80II
+    - Changed library file format to xcframework.
+    - Added new functions
+      - Added verifyPassword API in Printer Class.
+      - Added setPrinterSettingEx API with printer's password in Printer Class. SetPrinterSettingEx API without password is deprecated.
+      - Added full-cut parameter on addCut API.
+
   Version 2.20.0
     - Added support iOS/iPadOS versions
       - iOS 12.5.5, 15.0 - 15.0.2

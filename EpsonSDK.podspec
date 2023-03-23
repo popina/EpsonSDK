@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = 'EpsonSDK'
-  s.version      = '2.20.0'
+  s.version      = '2.23.0'
   s.summary      = 'Epson ePOS-Print SDK for iOS'
   s.description  = <<-DESC
                     The ePOS-Print SDK for iOS is an SDK aimed at development engineers who 
@@ -15,9 +15,7 @@ Pod::Spec.new do |s|
   s.author       = { 'SEIKO EPSON CORPORATION' => 'contact@epson.com' }
   s.platform     = :ios, '11.4'
   s.source       = { :git => 'https://github.com/popina/EpsonSDK.git', :tag => s.version.to_s }
-  s.source_files  = 'ePOS2.h'
-  s.preserve_paths = 'libepos2.a'
-  s.frameworks = 'UIKit', 'CoreGraphics', 'ExternalAccessory'
-  s.library   = 'epos2', 'z', 'xml2.2'
-  s.xcconfig  =  { 'LIBRARY_SEARCH_PATHS' => '"$(PODS_ROOT)/EpsonSDK"' }
+
+
+  s.vendored_frameworks = "libepos2.xcframework", "libeposeasyselect.xcframework"
 end
